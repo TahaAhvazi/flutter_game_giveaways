@@ -4,6 +4,7 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_reward/blocs/bloc/give_aways_bloc.dart';
 import 'package:flutter_game_reward/widgets/giveawayslist.dart';
+import 'package:lottie/lottie.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -21,8 +22,9 @@ class HomePage extends StatelessWidget {
         body: BlocBuilder<GiveAwaysBloc, GiveAwaysState>(
           builder: (context, state) {
             if (state is GiveAwaysLoadingState) {
-              return const Center(
-                child: CircularProgressIndicator(),
+              return Center(
+                child: Lottie.asset("assets/splashLoading.json",
+                    height: 80, width: 80),
               );
             }
             if (state is GiveAwaysLoadedState) {
