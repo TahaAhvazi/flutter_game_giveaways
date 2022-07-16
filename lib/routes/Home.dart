@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_game_reward/blocs/bloc/give_aways_bloc.dart';
+import 'package:flutter_game_reward/widgets/categories.dart';
 import 'package:flutter_game_reward/widgets/giveawayslist.dart';
 import 'package:flutter_game_reward/widgets/storiesListview.dart';
 import 'package:lottie/lottie.dart';
@@ -18,7 +17,7 @@ class HomePage extends StatelessWidget {
       create: (context) => GiveAwaysBloc(RepositoryProvider.of(context))
         ..add(GiveAwaysFetchedEvent()),
       child: Scaffold(
-        backgroundColor: Color.fromARGB(255, 0, 0, 0),
+        backgroundColor: Color.fromARGB(255, 0, 1, 41),
         appBar: AppBar(
           elevation: 0.0,
           backgroundColor: Color.fromARGB(255, 36, 37, 88),
@@ -52,47 +51,68 @@ class HomePage extends StatelessWidget {
               );
             }
             if (state is GiveAwaysLoadedState) {
-              return Column(
-                children: [
-                  Container(
-                    height: height * 15 / 100,
-                    width: width,
-                    decoration: BoxDecoration(
-                      color: Color.fromARGB(255, 36, 37, 88),
-                      borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(22),
-                        bottomRight: Radius.circular(22),
+              return SingleChildScrollView(
+                child: Column(
+                  children: [
+                    Container(
+                      height: height * 15 / 100,
+                      width: width,
+                      decoration: BoxDecoration(
+                        color: Color.fromARGB(255, 36, 37, 88),
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(22),
+                          bottomRight: Radius.circular(22),
+                        ),
+                      ),
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index) {
+                          return StoriesListView(
+                              giveAways: state.giveAways[index]);
+                        },
                       ),
                     ),
-                    child: ListView.builder(
-                      scrollDirection: Axis.horizontal,
-                      itemBuilder: (context, index) {
-                        return StoriesListView(
-                            giveAways: state.giveAways[index]);
-                      },
-                    ),
-                  ),
-                  Container(
-                    height: height * 70 / 100,
-                    child: ListView.builder(
-                      itemCount: state.giveAways.length,
-                      itemBuilder: (context, index) {
-                        return Padding(
-                          padding:
-                              const EdgeInsets.only(top: 18.0, bottom: 10.0),
-                          child: Column(
-                            children: [
-                              GiveAwaysList(
-                                giveAways: state.giveAways[index],
-                              ),
-                              SizedBox(height: height * 4 / 100)
-                            ],
+                    CategoriWidget(),
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        right: 200.0,
+                        left: 10,
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          "Most Popular ❤️‍🔥",
+                          style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                            color: Colors.white,
                           ),
-                        );
-                      },
+                        ),
+                      ),
                     ),
-                  ),
-                ],
+                    Container(
+                      height: height * 48 / 100,
+                      child: ListView.builder(
+                        physics: BouncingScrollPhysics(),
+                        itemCount: state.giveAways.length,
+                        itemBuilder: (context, index) {
+                          return Padding(
+                            padding:
+                                const EdgeInsets.only(top: 18.0, bottom: 10.0),
+                            child: Column(
+                              children: [
+                                GiveAwaysList(
+                                  giveAways: state.giveAways[index],
+                                ),
+                                SizedBox(height: height * 4 / 100)
+                              ],
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ],
+                ),
               );
             }
             return const Center(child: Text("UNKNOWN ERROR OCUURED"));

@@ -139,6 +139,51 @@ class GiveAwaysList extends StatelessWidget {
                 ),
               ),
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: GlassmorphicContainer(
+                  width: width * 30 / 100,
+                  height: height * 5 / 100,
+                  borderRadius: 9,
+                  blur: 30,
+                  alignment: Alignment.bottomCenter,
+                  border: 0,
+                  linearGradient: LinearGradient(
+                      begin: Alignment.topLeft,
+                      end: Alignment.bottomRight,
+                      colors: [
+                        Color(0xFFffffff).withOpacity(0.1),
+                        Color(0xFFFFFFFF).withOpacity(0.05),
+                      ],
+                      stops: [
+                        0.1,
+                        1,
+                      ]),
+                  borderGradient: LinearGradient(
+                    begin: Alignment.topLeft,
+                    end: Alignment.bottomRight,
+                    colors: [
+                      Color(0xFFffffff).withOpacity(0.5),
+                      Color((0xFFFFFFFF)).withOpacity(0.5),
+                    ],
+                  ),
+                  child: Row(
+                    children: [
+                      Center(
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "Worth : ${giveAways.worth}",
+                            style: TextStyle(
+                              color: Color.fromARGB(255, 255, 255, 255),
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      )
+                    ],
+                  )),
+            ),
           ],
         ),
       ),
