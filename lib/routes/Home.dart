@@ -77,8 +77,17 @@ class HomePage extends StatelessWidget {
                     child: ListView.builder(
                       itemCount: state.giveAways.length,
                       itemBuilder: (context, index) {
-                        return GiveAwaysList(
-                          giveAways: state.giveAways[index],
+                        return Padding(
+                          padding:
+                              const EdgeInsets.only(top: 18.0, bottom: 10.0),
+                          child: Column(
+                            children: [
+                              GiveAwaysList(
+                                giveAways: state.giveAways[index],
+                              ),
+                              SizedBox(height: height * 4 / 100)
+                            ],
+                          ),
                         );
                       },
                     ),

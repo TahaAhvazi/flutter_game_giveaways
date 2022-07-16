@@ -21,21 +21,37 @@ class StoriesListView extends StatelessWidget {
           children: [
             BlocBuilder<GiveAwaysBloc, GiveAwaysState>(
               builder: (context, state) {
-                return Container(
-                  height: height * 9 / 100,
-                  width: width * 15 / 100,
-                  decoration: BoxDecoration(
-                    border: Border.all(color: Colors.blueAccent, width: 2.0),
-                    borderRadius: BorderRadius.circular(50),
-                    color: Colors.white,
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(50),
-                    child: Image.network(
-                      giveAways.thumbnail,
-                      fit: BoxFit.fitHeight,
+                return Column(
+                  children: [
+                    Container(
+                      height: height * 9 / 100,
+                      width: width * 15 / 100,
+                      decoration: BoxDecoration(
+                        border:
+                            Border.all(color: Colors.blueAccent, width: 2.0),
+                        borderRadius: BorderRadius.circular(50),
+                        color: Colors.white,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(50),
+                        child: Image.network(
+                          giveAways.thumbnail,
+                          fit: BoxFit.fitHeight,
+                        ),
+                      ),
                     ),
-                  ),
+                    SizedBox(
+                      height: height * 1.5 / 100,
+                    ),
+                    Text(
+                      giveAways.title.substring(0, 5),
+                      maxLines: 1,
+                      style: TextStyle(
+                        color: Color.fromARGB(255, 184, 184, 184),
+                        fontWeight: FontWeight.w700,
+                      ),
+                    )
+                  ],
                 );
               },
             ),
