@@ -6,6 +6,8 @@ import 'package:flutter_game_reward/widgets/giveawayslist.dart';
 import 'package:flutter_game_reward/widgets/storiesListview.dart';
 import 'package:lottie/lottie.dart';
 
+import 'giveaway_detail.dart';
+
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
 
@@ -67,8 +69,45 @@ class HomePage extends StatelessWidget {
                       child: ListView.builder(
                         scrollDirection: Axis.horizontal,
                         itemBuilder: (context, index) {
-                          return StoriesListView(
-                              giveAways: state.giveAways[index]);
+                          return GestureDetector(
+                            onTap: () {
+                              print("Clicledddd");
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => GiveAwayDetailRoute(
+                                    title: state.giveAways[index].title,
+                                    imageUrl: state.giveAways[index].image,
+                                    description:
+                                        state.giveAways[index].description,
+                                    instructions:
+                                        state.giveAways[index].instructions,
+                                    open_giveaway_url:
+                                        state.giveAways[index].openGiveaway,
+                                    published_date: state
+                                        .giveAways[index].publishedDate
+                                        .toString(),
+                                    type:
+                                        state.giveAways[index].type.toString(),
+                                    platforms: state.giveAways[index].platforms
+                                        .toString(),
+                                    end_date:
+                                        state.giveAways[index].users.toString(),
+                                    users:
+                                        state.giveAways[index].users.toString(),
+                                    status: state.giveAways[index].status
+                                        .toString(),
+                                    gamerpower_url:
+                                        state.giveAways[index].gamerpowerUrl,
+                                    open_giveaway:
+                                        state.giveAways[index].openGiveaway,
+                                    herotag: index.toString(),
+                                  ),
+                                ),
+                              );
+                            },
+                            child: StoriesListView(
+                                giveAways: state.giveAways[index]),
+                          );
                         },
                       ),
                     ),
@@ -96,16 +135,56 @@ class HomePage extends StatelessWidget {
                         physics: BouncingScrollPhysics(),
                         itemCount: state.giveAways.length,
                         itemBuilder: (context, index) {
-                          return Padding(
-                            padding:
-                                const EdgeInsets.only(top: 18.0, bottom: 10.0),
-                            child: Column(
-                              children: [
-                                GiveAwaysList(
-                                  giveAways: state.giveAways[index],
+                          return GestureDetector(
+                            onTap: () {
+                              print("Clicledddd");
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                  builder: (context) => GiveAwayDetailRoute(
+                                    title: state.giveAways[index].title,
+                                    imageUrl: state.giveAways[index].image,
+                                    description:
+                                        state.giveAways[index].description,
+                                    instructions:
+                                        state.giveAways[index].instructions,
+                                    open_giveaway_url:
+                                        state.giveAways[index].openGiveaway,
+                                    published_date: state
+                                        .giveAways[index].publishedDate
+                                        .toString(),
+                                    type:
+                                        state.giveAways[index].type.toString(),
+                                    platforms: state.giveAways[index].platforms
+                                        .toString(),
+                                    end_date:
+                                        state.giveAways[index].users.toString(),
+                                    users:
+                                        state.giveAways[index].users.toString(),
+                                    status: state.giveAways[index].status
+                                        .toString(),
+                                    gamerpower_url:
+                                        state.giveAways[index].gamerpowerUrl,
+                                    open_giveaway:
+                                        state.giveAways[index].openGiveaway,
+                                    herotag: index.toString(),
+                                  ),
                                 ),
-                                SizedBox(height: height * 4 / 100)
-                              ],
+                              );
+                            },
+                            child: Hero(
+                              tag: index,
+                              child: Padding(
+                                padding: const EdgeInsets.only(
+                                    top: 18.0, bottom: 10.0),
+                                child: Column(
+                                  children: [
+                                    GiveAwaysList(
+                                      giveAways: state.giveAways[index],
+                                    ),
+                                    SizedBox(height: height * 4 / 100)
+                                  ],
+                                ),
+                              ),
                             ),
                           );
                         },
