@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_game_reward/routes/Home.dart';
+import 'package:flutter_game_reward/routes/onboard_screen.dart';
 import 'package:flutter_game_reward/services/giveawaysServices.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -28,10 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: RepositoryProvider(
-        create: (context) => GetGiveAwaysSservice(),
-        child: const HomePage(),
-      ),
+      home: const OnBoardingScreen(),
     );
   }
 }
